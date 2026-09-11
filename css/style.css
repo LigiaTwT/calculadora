@@ -1,56 +1,391 @@
-.fundo {
-  background-image: linear-gradient(45deg, black, red);
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  width: 100vw;
-  height: 100vh;
+/* ========================================
+   VARIÁVEIS DE DESIGN
+======================================== */
+
+:root {
+    /* Cor principal */
+    --pink-main: #e85b9e;
+    --pink-dark: #c94482;
+    --pink-light: #f8c6dc;
+
+    /* Cores dos elementos */
+    --blue-pastel: #a9dbea;
+    --blue-dark: #579bb4;
+
+    --purple-pastel: #c9b5e8;
+    --purple-dark: #8061b2;
+
+    --yellow-pastel: #f7df8b;
+    --yellow-dark: #b99a32;
+
+    /* Neutros */
+    --cream: #fff8ef;
+    --white: #ffffff;
+    --text: #4b3a46;
+    --text-soft: #907b88;
+
+    --calculator-width: 360px;
 }
+
+
+/* ========================================
+   RESET
+======================================== */
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1 {
-  text-align: center;
+
+/* ========================================
+   PÁGINA
+======================================== */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            #fbd9e8,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            #e9def8,
+            transparent 35%
+        ),
+        var(--cream);
 }
 
-.calculadora {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 15px;
-  padding: 15px;
 
-  h1 {
-    margin-bottom: 30px;
-    text-align: center;
-  }
+/* ========================================
+   CENA
+======================================== */
+
+.calculator-scene {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
 }
 
-.botao {
-  width: 50px;
-  height: 50px;
-  font-size: 25px;
-  cursor: pointer;
-  background-color: rgb(31, 31, 31);
-  border: none;
-  color: white;
-  margin: 3px;
-}
-.botao:hover {
-  background-color: black;
+
+/* ========================================
+   CORPO DA CALCULADORA
+======================================== */
+
+.calculator {
+    width: min(100%, var(--calculator-width));
+
+    padding: 24px;
+
+    border-radius: 32px;
+
+    background: linear-gradient(
+        145deg,
+        #f06aa8,
+        var(--pink-main)
+    );
+
+    border: 3px solid rgba(255, 255, 255, 0.45);
+
+    box-shadow:
+        0 28px 45px rgba(150, 60, 105, 0.22),
+        0 10px 20px rgba(150, 60, 105, 0.12);
 }
 
-#resultado{
-    background-color: white;
-    width: 210px;
-    height: 30px;
-    margin: 5px;
-    font-size: 25px;
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.calculator-header {
+    margin-bottom: 18px;
+}
+
+.calculator-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+
+    color: #ffffff;
+}
+
+
+/* ========================================
+   DISPLAY
+======================================== */
+
+.calculator-display {
+    min-height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 20px;
+
+    margin-bottom: 18px;
+
+    border-radius: 22px;
+
+    background: #fffdfb;
+
+    border: 3px solid rgba(255, 255, 255, 0.35);
+
+    box-shadow:
+        inset 0 3px 8px rgba(90, 50, 70, 0.08),
+        0 5px 12px rgba(150, 60, 105, 0.12);
+}
+
+
+/* Expressão */
+
+.display-expression {
+    min-height: 24px;
+
     text-align: right;
-    color: black;
-    padding: 5px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    color: var(--text-soft);
+}
+
+
+/* Resultado */
+
+.display-value {
+    display: block;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    text-align: right;
+
+    font-size: 2.4rem;
+    font-weight: 700;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: var(--text);
+}
+
+
+/* ========================================
+   TECLADO
+======================================== */
+
+.calculator-keypad {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+
+/* ========================================
+   BOTÕES BASE
+======================================== */
+
+.calculator-button {
+    min-height: 62px;
+
+    border: none;
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    font-size: 1.15rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 0 rgba(90, 50, 70, 0.14);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        filter 0.15s ease;
+}
+
+
+/* ========================================
+   HOVER
+======================================== */
+
+.calculator-button:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.03);
+
+    box-shadow:
+        0 8px 0 rgba(90, 50, 70, 0.14);
+}
+
+
+/* ========================================
+   CLIQUE
+======================================== */
+
+.calculator-button:active {
+    transform: translateY(4px);
+
+    box-shadow:
+        0 2px 0 rgba(90, 50, 70, 0.14);
+}
+
+
+/* ========================================
+   FUNÇÕES
+======================================== */
+
+.calculator-button--function {
+    background: var(--purple-pastel);
+
+    color: var(--purple-dark);
+}
+
+
+/* ========================================
+   OPERADORES
+======================================== */
+
+.calculator-button--operator {
+    background: var(--blue-pastel);
+
+    color: var(--blue-dark);
+}
+
+
+/* ========================================
+   IGUAL
+======================================== */
+
+.calculator-button--equals {
+    background: var(--yellow-pastel);
+
+    color: var(--yellow-dark);
+}
+
+
+/* ========================================
+   ZERO
+======================================== */
+
+.calculator-button--zero {
+    grid-column: span 2;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 420px) {
+
+    .calculator-scene {
+        padding: 16px;
+    }
+
+    .calculator {
+        padding: 18px;
+
+        border-radius: 26px;
+    }
+
+    .calculator-button {
+        min-height: 58px;
+
+        border-radius: 16px;
+    }
+
+    .display-value {
+        font-size: 2rem;
+    }
+}
+
+/* ========================================
+   SOMBRA DA CALCULADORA
+======================================== */
+
+.calculator-scene {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+}
+
+
+.calculator {
+    position: relative;
+    z-index: 1;
+
+    width: min(100%, var(--calculator-width));
+
+    padding: 24px;
+
+    border-radius: 32px;
+
+    background: linear-gradient(
+        145deg,
+        #f06aa8,
+        var(--pink-main)
+    );
+
+    border: 3px solid rgba(255, 255, 255, 0.45);
+
+    box-shadow:
+        0 28px 45px rgba(150, 60, 105, 0.22),
+        0 10px 20px rgba(150, 60, 105, 0.12);
+}
+
+
+.calculator-scene::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 15%;
+
+    width: 260px;
+    height: 35px;
+
+    transform: translateX(-50%);
+
+    background: rgba(90, 55, 80, 0.18);
+
+    border-radius: 50%;
+
+    filter: blur(18px);
+
+    z-index: 0;
 }
