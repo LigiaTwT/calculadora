@@ -1,55 +1,218 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Calculadora</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <div class="fundo">
-        <h1>Ligia Silva</h1>
-        <div class="calculadora">
-            <h1>Calculadora</h1>
-            <p id="resultado"></p>
-            <table>
-                <tr>
-                    <td><button class="botao" onclick="clean()">C</button></td>
-                    <td><button class="botao" onclick="back()"><</button></td>
-                    <td><button class="botao" onclick="insert('/')" >/</button></td>
-                    <td><button class="botao" onclick="insert('*')">x</button></td>
-                </tr>
 
-                <tr>
-                    <td><button class="botao" onclick="insert('7')">7</button></td>
-                    <td><button class="botao" onclick="insert('8')">8</button></td>
-                    <td><button class="botao" onclick="insert('9')">9</button></td>
-                    <td><button class="botao" onclick="insert('-')">-</button></td>
-                </tr>
+    <main class="calculator-scene">
 
-                <tr>
-                    <td><button class="botao" onclick="insert('4')">4</button></td>
-                    <td><button class="botao" onclick="insert('5')">5</button></td>
-                    <td><button class="botao" onclick="insert('6')">6</button></td>
-                    <td><button class="botao" onclick="insert('+')">+</button></td>
-                </tr>
+        <section class="calculator" aria-label="Calculadora">
 
-                <tr>
-                    <td><button class="botao" onclick="insert('1')">1</button></td>
-                    <td><button class="botao" onclick="insert('2')">2</button></td>
-                    <td><button class="botao" onclick="insert('3')">3</button></td>
-                    <td rowspan="2"><button class="botao" style="height: 106px;" onclick="calcular()">=</button></td>
-                </tr>
+            <header class="calculator-header">
+                <h1 class="calculator-title">Calculadora</h1>
+            </header>
 
-                <tr>
-                    <td colspan="2"><button class="botao" style="width: 106px;" onclick="insert('0')">0</button></td>
-                    <td><button class="botao" onclick="insert('.')">.</button></td>
-                </tr>
-            </table>
-        </div>
-        
-    </div>
+            <div class="calculator-display">
+                <output
+                    id="display"
+                    class="display-value"
+                    aria-label="Resultado da calculadora"
+                >
+                    0
+                </output>
+            </div>
 
-    <script src="script.js"></script>
+            <div class="calculator-keypad">
+
+                <!-- Funções -->
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--function"
+                    data-action="clear"
+                >
+                    C
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--function"
+                    data-action="backspace"
+                    aria-label="Apagar último número"
+                >
+                    ⌫
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--operator"
+                    data-action="operator"
+                    data-value="/"
+                    aria-label="Divisão"
+                >
+                    ÷
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--operator"
+                    data-action="operator"
+                    data-value="*"
+                    aria-label="Multiplicação"
+                >
+                    ×
+                </button>
+
+
+                <!-- Linha 2 -->
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="7"
+                >
+                    7
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="8"
+                >
+                    8
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="9"
+                >
+                    9
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--operator"
+                    data-action="operator"
+                    data-value="-"
+                    aria-label="Subtração"
+                >
+                    −
+                </button>
+
+
+                <!-- Linha 3 -->
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="4"
+                >
+                    4
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="5"
+                >
+                    5
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="6"
+                >
+                    6
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--operator"
+                    data-action="operator"
+                    data-value="+"
+                    aria-label="Adição"
+                >
+                    +
+                </button>
+
+
+                <!-- Linha 4 -->
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="1"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="2"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="number"
+                    data-value="3"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--equals"
+                    data-action="equals"
+                    aria-label="Resultado"
+                >
+                    =
+                </button>
+
+
+                <!-- Linha 5 -->
+                <button
+                    type="button"
+                    class="calculator-button calculator-button--zero"
+                    data-action="number"
+                    data-value="0"
+                >
+                    0
+                </button>
+
+                <button
+                    type="button"
+                    class="calculator-button"
+                    data-action="decimal"
+                    data-value="."
+                    aria-label="Vírgula decimal"
+                >
+                    ,
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/calculator.js"></script>
+
 </body>
 </html>
