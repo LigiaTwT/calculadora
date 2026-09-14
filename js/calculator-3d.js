@@ -4,7 +4,7 @@ const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
 const precisePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
 
 const maxRotateX = 6;
-const maxRotateY = 8;
+const maxRotateY = 12;
 const wheelSensitivity = 0.01;
 const smoothing = 0.12;
 

@@ -10,10 +10,6 @@
    WRAPPER DE TRANSFORMAÇÃO
 ======================================== */
 
-/*
-    Este plano fica reservado para as rotações de interação futura.
-    O corpo mantém aqui apenas a sua profundidade física estática.
-*/
 .calculator-3d-wrapper {
   --rotate-x: 0deg;
   --rotate-y: 0deg;
@@ -36,16 +32,7 @@
 
   transform-style: preserve-3d;
 
-  /* Inclinação estática sutil; a interação futura ficará no wrapper. */
   transform: rotateX(2deg);
-
-  /*
-        Camadas de sombra:
-
-        1ª → pequena espessura
-        2ª → sombra próxima
-        3ª → sombra espalhada
-    */
 
   box-shadow:
     0 12px 0 var(--pink-dark),
@@ -66,10 +53,6 @@
 
   border-radius: inherit;
 
-  /*
-        Brilho suave na parte superior.
-    */
-
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.2),
@@ -79,6 +62,8 @@
   pointer-events: none;
 
   transform: translateZ(3px);
+
+  z-index: 10;
 }
 
 /* ========================================
@@ -92,7 +77,7 @@
 
   inset: 10px 0 -10px;
 
-  border-radius: 0 0 30px 30px;
+  border-radius: 30px;
 
   background: linear-gradient(to bottom, var(--pink-dark), #ad306c);
 
@@ -101,6 +86,88 @@
   pointer-events: none;
 
   transform: translateZ(-10px);
+}
+
+/* ========================================
+   FACES LATERAIS DO CORPO
+======================================== */
+
+.calculator-side {
+  /*
+    A profundidade continua grande para que
+    a perspectiva 3D consiga revelar a lateral.
+  */
+  --side-depth: 300px;
+
+  /*
+    Apenas uma pequena parte da lateral
+    ficará visível.
+  */
+  --visible-depth: 80px;
+
+  /*
+    Mantém a lateral posicionada no ponto
+    correto da geometria 3D.
+  */
+  --side-offset: -300px;
+
+  position: absolute;
+
+  top: 10px;
+
+  width: var(--side-depth);
+
+  height: calc(100% - 20px);
+
+  background: linear-gradient(to bottom, #c44b87, #a93670);
+
+  pointer-events: none;
+
+  transform-style: preserve-3d;
+
+  backface-visibility: hidden;
+}
+
+/* ========================================
+   LATERAL ESQUERDA
+======================================== */
+
+.calculator-side--left {
+  left: var(--side-offset);
+
+  transform-origin: right center;
+
+  /*
+    Recorta todo o excesso da face.
+    A geometria continua tendo 300px,
+    mas somente os 24px próximos da
+    calculadora podem aparecer.
+  */
+  clip-path: inset(0 0 0 calc(var(--side-depth) - var(--visible-depth)));
+
+  border-radius: 0 0 0 30px;
+
+  transform: rotateY(-85deg);
+}
+
+/* ========================================
+   LATERAL DIREITA
+======================================== */
+
+.calculator-side--right {
+  right: var(--side-offset);
+
+  transform-origin: left center;
+
+  /*
+    Mesmo princípio da esquerda,
+    invertido horizontalmente.
+  */
+  clip-path: inset(0 calc(var(--side-depth) - var(--visible-depth)) 0 0);
+
+  border-radius: 0 0 30px 0;
+
+  transform: rotateY(85deg);
 }
 
 /* ========================================
@@ -129,7 +196,7 @@
   overflow: hidden;
 
   box-shadow:
-    inset 0 16px 0 rgba(194, 68, 130, 0.30),
+    inset 0 16px 0 rgba(194, 68, 130, 0.3),
     inset 0 12px 14px rgba(91, 49, 73, 0.18),
     inset 0 -3px 6px rgba(91, 49, 73, 0.1);
 }
@@ -215,7 +282,10 @@
   transform: translateZ(-2px);
 }
 
-/* Bases com a mesma família de cor da superfície. */
+/* ========================================
+   CORES DAS BASES DOS BOTÕES
+======================================== */
+
 .calculator-button--function {
   --button-base: #af92d2;
 }
@@ -272,8 +342,22 @@
     perspective: 1000px;
   }
 
-  .calculator {
-    transform: rotateX(1deg);
+  .calculator-side {
+    --side-depth: 300px;
+    --visible-depth: 16px;
+    --side-offset: -300px;
+
+    top: 8px;
+
+    height: calc(100% - 16px);
+  }
+
+  .calculator-side--left {
+    left: var(--side-offset);
+  }
+
+  .calculator-side--right {
+    right: var(--side-offset);
   }
 }
 
