@@ -25,7 +25,8 @@
     --text-soft: #907b88;
 
     /* Dimensões */
-    --calculator-width: 360px;
+    --calculator-width: 440px;
+    --calculator-padding: 24px;
 }
 
 
@@ -43,6 +44,10 @@
 /* ========================================
    PÁGINA
 ======================================== */
+
+html {
+    min-height: 100%;
+}
 
 body {
     min-height: 100vh;
@@ -85,6 +90,28 @@ body {
     justify-content: center;
 
     padding: 24px;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   WRAPPER DA CALCULADORA
+======================================== */
+
+/*
+    O wrapper controla a largura total do objeto.
+
+    Isso mantém a dimensão da calculadora
+    consistente com a estrutura 3D.
+*/
+
+.calculator-3d-wrapper {
+    position: relative;
+
+    width: min(80%, var(--calculator-width));
+
+    flex-shrink: 0;
 }
 
 
@@ -100,7 +127,7 @@ body {
     left: 50%;
     bottom: 15%;
 
-    width: 280px;
+    width: min(280px, 60vw);
     height: 40px;
 
     transform: translateX(-50%);
@@ -112,6 +139,8 @@ body {
     filter: blur(22px);
 
     z-index: 0;
+
+    pointer-events: none;
 }
 
 
@@ -123,17 +152,19 @@ body {
     position: relative;
     z-index: 1;
 
-    width: min(100%, var(--calculator-width));
+    width: 100%;
+    max-width: 100%;
 
-    padding: 24px;
+    padding: var(--calculator-padding);
 
     border-radius: 32px;
 
-    background: linear-gradient(
-        145deg,
-        #f06aa8,
-        var(--pink-main)
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #f06aa8 0%,
+            var(--pink-main) 100%
+        );
 
     border: 3px solid rgba(255, 255, 255, 0.45);
 
@@ -168,6 +199,7 @@ body {
 ======================================== */
 
 .calculator-display {
+    width: 100%;
     min-height: 120px;
 
     display: flex;
@@ -195,7 +227,10 @@ body {
 ======================================== */
 
 .display-expression {
+    width: 100%;
     min-height: 24px;
+
+    overflow: hidden;
 
     text-align: right;
 
@@ -203,6 +238,9 @@ body {
     font-weight: 600;
 
     color: var(--text-soft);
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
@@ -224,6 +262,8 @@ body {
     font-size: 2.4rem;
     font-weight: 600;
 
+    line-height: 1.1;
+
     white-space: nowrap;
     text-overflow: ellipsis;
 
@@ -236,9 +276,11 @@ body {
 ======================================== */
 
 .calculator-keypad {
+    width: 100%;
+
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
     gap: 10px;
 }
@@ -249,6 +291,8 @@ body {
 ======================================== */
 
 .calculator-button {
+    width: 100%;
+    min-width: 0;
     min-height: 62px;
 
     border: none;
@@ -302,6 +346,16 @@ body {
 
 
 /* ========================================
+   FOCO PELO TECLADO
+======================================== */
+
+.calculator-button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 3px;
+}
+
+
+/* ========================================
    BOTÕES DE FUNÇÃO
 ======================================== */
 
@@ -347,10 +401,30 @@ body {
    RESPONSIVIDADE
 ======================================== */
 
+@media (max-width: 600px) {
+
+    :root {
+        --calculator-padding: 20px;
+    }
+
+    .calculator-scene {
+        padding: 20px;
+    }
+
+    .calculator {
+        border-radius: 28px;
+    }
+}
+
+
 @media (max-width: 420px) {
 
     .calculator-scene {
         padding: 16px;
+    }
+
+    .calculator-3d-wrapper {
+        width: 100%;
     }
 
     .calculator {
@@ -365,7 +439,25 @@ body {
         border-radius: 16px;
     }
 
+    .calculator-display {
+        padding: 18px;
+
+        border-radius: 20px;
+    }
+
     .display-value {
         font-size: 2rem;
+    }
+}
+
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .calculator-button {
+        transition: none;
     }
 }
