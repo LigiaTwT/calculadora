@@ -1,0 +1,229 @@
+/* ========================================
+   CENA 3D
+======================================== */
+
+.calculator-scene {
+    perspective: 1400px;
+}
+
+
+/* ========================================
+   CORPO DA CALCULADORA
+======================================== */
+
+.calculator {
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    /*
+        Não vamos inclinar muito a calculadora.
+        O 3D será criado principalmente pela
+        profundidade e pelas sombras.
+    */
+
+    transform:
+        rotateX(2deg)
+        rotateY(0deg);
+
+    /*
+        Camadas de sombra:
+
+        1ª → pequena espessura
+        2ª → sombra próxima
+        3ª → sombra espalhada
+    */
+
+    box-shadow:
+        0 8px 0 var(--pink-dark),
+        0 16px 20px rgba(150, 60, 105, 0.18),
+        0 30px 45px rgba(150, 60, 105, 0.13);
+}
+
+
+/* ========================================
+   TAMPA / BRILHO DO CORPO
+======================================== */
+
+.calculator::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    /*
+        Brilho suave na parte superior.
+    */
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.20),
+            transparent 35%
+        );
+
+    pointer-events: none;
+
+    transform: translateZ(2px);
+}
+
+
+/* ========================================
+   PROFUNDIDADE DO CABEÇALHO
+======================================== */
+
+.calculator-header {
+    position: relative;
+
+    transform: translateZ(12px);
+}
+
+
+/* ========================================
+   PROFUNDIDADE DO DISPLAY
+======================================== */
+
+.calculator-display {
+    position: relative;
+
+    transform: translateZ(18px);
+
+    box-shadow:
+        0 5px 0 rgba(210, 180, 195, 0.65),
+        inset 0 3px 8px rgba(90, 50, 70, 0.08),
+        0 8px 15px rgba(90, 50, 70, 0.12);
+}
+
+
+/* ========================================
+   TECLADO
+======================================== */
+
+.calculator-keypad {
+    position: relative;
+
+    transform: translateZ(14px);
+}
+
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+.calculator-button {
+    position: relative;
+
+    transform: translateZ(10px);
+
+    box-shadow:
+        0 7px 0 rgba(91, 49, 73, 0.22),
+        0 12px 18px rgba(91, 49, 73, 0.12);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        filter 0.15s ease;
+}
+
+
+/* ========================================
+   BRILHO DOS BOTÕES
+======================================== */
+
+.calculator-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 2px;
+    left: 5px;
+    right: 5px;
+
+    height: 35%;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.30),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   HOVER
+======================================== */
+
+.calculator-button:hover {
+    transform:
+        translateY(-3px)
+        translateZ(15px);
+
+    box-shadow:
+        0 9px 0 rgba(91, 49, 73, 0.22),
+        0 16px 22px rgba(91, 49, 73, 0.15);
+}
+
+
+/* ========================================
+   CLIQUE
+======================================== */
+
+.calculator-button:active {
+    transform:
+        translateY(5px)
+        translateZ(5px);
+
+    box-shadow:
+        0 2px 0 rgba(91, 49, 73, 0.20),
+        0 5px 9px rgba(91, 49, 73, 0.10);
+}
+
+
+/* ========================================
+   DISPLAY — PROFUNDIDADE INTERNA
+======================================== */
+
+.display-expression,
+.display-value {
+    position: relative;
+
+    transform: translateZ(2px);
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 420px) {
+
+    .calculator-scene {
+        perspective: 1000px;
+    }
+
+    .calculator {
+        transform:
+            rotateX(1deg)
+            rotateY(0deg);
+    }
+}
+
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .calculator-button {
+        transition: none;
+    }
+}

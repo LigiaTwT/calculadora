@@ -3,357 +3,369 @@
 ======================================== */
 
 :root {
-  /* Cor principal */
-  --pink-main: #e85b9e;
-  --pink-dark: #c94482;
-  --pink-light: #f8c6dc;
+    /* Cor principal */
+    --pink-main: #e85b9e;
+    --pink-dark: #c94482;
+    --pink-light: #f8c6dc;
 
-  /* Cores dos elementos */
-  --blue-pastel: #a9dbea;
-  --blue-dark: #579bb4;
+    /* Elementos */
+    --blue-pastel: #a9dbea;
+    --blue-dark: #579bb4;
 
-  --purple-pastel: #c9b5e8;
-  --purple-dark: #8061b2;
+    --purple-pastel: #c9b5e8;
+    --purple-dark: #8061b2;
 
-  --yellow-pastel: #f7df8b;
-  --yellow-dark: #b99a32;
+    --yellow-pastel: #f7df8b;
+    --yellow-dark: #b99a32;
 
-  /* Neutros */
-  --cream: #fff8ef;
-  --white: #ffffff;
-  --text: #4b3a46;
-  --text-soft: #907b88;
+    /* Neutros */
+    --cream: #fff8ef;
+    --white: #ffffff;
+    --text: #4b3a46;
+    --text-soft: #907b88;
 
-  --calculator-width: 360px;
+    /* Dimensões */
+    --calculator-width: 360px;
 }
+
 
 /* ========================================
    RESET
 ======================================== */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 
 /* ========================================
    PÁGINA
 ======================================== */
 
 body {
-  min-height: 100vh;
+    min-height: 100vh;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  color: var(--text);
+    font-family: "Nunito", sans-serif;
 
-  background:
-    radial-gradient(circle at 15% 15%, #fbd9e8, transparent 35%),
-    radial-gradient(circle at 85% 85%, #e9def8, transparent 35%), var(--cream);
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            #fbd9e8,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            #e9def8,
+            transparent 35%
+        ),
+        var(--cream);
 }
 
-body {
-  font-family: "Nunito", sans-serif;
-}
-
-.calculator-title,
-.calculator-button,
-.display-value {
-  font-family: "Fredoka", sans-serif;
-}
 
 /* ========================================
    CENA
 ======================================== */
 
 .calculator-scene {
-  width: 100%;
-  min-height: 100vh;
+    position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    min-height: 100vh;
 
-  padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
 }
+
+
+/* ========================================
+   SOMBRA DA CALCULADORA
+======================================== */
+
+.calculator-scene::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 15%;
+
+    width: 280px;
+    height: 40px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: rgba(91, 49, 73, 0.22);
+
+    filter: blur(22px);
+
+    z-index: 0;
+}
+
 
 /* ========================================
    CORPO DA CALCULADORA
 ======================================== */
 
 .calculator {
-  width: min(100%, var(--calculator-width));
+    position: relative;
+    z-index: 1;
 
-  padding: 24px;
+    width: min(100%, var(--calculator-width));
 
-  border-radius: 32px;
+    padding: 24px;
 
-  background: linear-gradient(145deg, #f06aa8, var(--pink-main));
+    border-radius: 32px;
 
-  border: 3px solid rgba(255, 255, 255, 0.45);
+    background: linear-gradient(
+        145deg,
+        #f06aa8,
+        var(--pink-main)
+    );
 
-  box-shadow:
-    0 28px 45px rgba(150, 60, 105, 0.22),
-    0 10px 20px rgba(150, 60, 105, 0.12);
+    border: 3px solid rgba(255, 255, 255, 0.45);
+
+    box-shadow:
+        0 28px 45px rgba(150, 60, 105, 0.22),
+        0 10px 20px rgba(150, 60, 105, 0.12);
 }
+
 
 /* ========================================
    CABEÇALHO
 ======================================== */
 
 .calculator-header {
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
 .calculator-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+    font-family: "Fredoka", sans-serif;
 
-  color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    letter-spacing: 0.03em;
+
+    color: var(--white);
 }
+
 
 /* ========================================
    DISPLAY
 ======================================== */
 
 .calculator-display {
-  min-height: 120px;
+    min-height: 120px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-  padding: 20px;
+    padding: 20px;
 
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 
-  border-radius: 22px;
+    border-radius: 22px;
 
-  background: #fffdfb;
+    background: #fffdfb;
 
-  border: 3px solid rgba(255, 255, 255, 0.35);
+    border: 3px solid rgba(255, 255, 255, 0.35);
 
-  box-shadow:
-    inset 0 3px 8px rgba(90, 50, 70, 0.08),
-    0 5px 12px rgba(150, 60, 105, 0.12);
+    box-shadow:
+        inset 0 3px 8px rgba(90, 50, 70, 0.08),
+        0 5px 12px rgba(150, 60, 105, 0.12);
 }
 
-/* Expressão */
+
+/* ========================================
+   EXPRESSÃO
+======================================== */
 
 .display-expression {
-  min-height: 24px;
+    min-height: 24px;
 
-  text-align: right;
+    text-align: right;
 
-  font-size: 0.9rem;
-  font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 600;
 
-  color: var(--text-soft);
+    color: var(--text-soft);
 }
 
-/* Resultado */
+
+/* ========================================
+   RESULTADO
+======================================== */
 
 .display-value {
-  display: block;
+    display: block;
 
-  width: 100%;
+    width: 100%;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  text-align: right;
+    text-align: right;
 
-  font-size: 2.4rem;
-  font-weight: 700;
+    font-family: "Fredoka", sans-serif;
 
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    font-size: 2.4rem;
+    font-weight: 600;
 
-  color: var(--text);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: var(--text);
 }
+
 
 /* ========================================
    TECLADO
 ======================================== */
 
 .calculator-keypad {
-  display: grid;
+    display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
-  gap: 10px;
+    gap: 10px;
 }
 
+
 /* ========================================
-   BOTÕES BASE
+   BOTÕES
 ======================================== */
 
 .calculator-button {
-  min-height: 62px;
+    min-height: 62px;
 
-  border: none;
-  border-radius: 18px;
+    border: none;
+    border-radius: 18px;
 
-  background: #ffffff;
+    background: var(--white);
 
-  color: var(--text);
+    color: var(--text);
 
-  font-size: 1.15rem;
-  font-weight: 700;
+    font-family: "Fredoka", sans-serif;
 
-  cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 600;
 
-  box-shadow: 0 6px 0 rgba(90, 50, 70, 0.14);
+    cursor: pointer;
 
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    filter 0.15s ease;
+    box-shadow:
+        0 6px 0 rgba(90, 50, 70, 0.14);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        filter 0.15s ease;
 }
+
 
 /* ========================================
    HOVER
 ======================================== */
 
 .calculator-button:hover {
-  transform: translateY(-2px);
+    transform: translateY(-2px);
 
-  filter: brightness(1.03);
+    filter: brightness(1.03);
 
-  box-shadow: 0 8px 0 rgba(90, 50, 70, 0.14);
+    box-shadow:
+        0 8px 0 rgba(90, 50, 70, 0.14);
 }
+
 
 /* ========================================
    CLIQUE
 ======================================== */
 
 .calculator-button:active {
-  transform: translateY(4px);
+    transform: translateY(1px);
 
-  box-shadow: 0 2px 0 rgba(90, 50, 70, 0.14);
+    box-shadow:
+        0 3px 0 rgba(90, 50, 70, 0.14);
 }
 
+
 /* ========================================
-   FUNÇÕES
+   BOTÕES DE FUNÇÃO
 ======================================== */
 
 .calculator-button--function {
-  background: var(--purple-pastel);
+    background: var(--purple-pastel);
 
-  color: var(--purple-dark);
+    color: var(--purple-dark);
 }
+
 
 /* ========================================
    OPERADORES
 ======================================== */
 
 .calculator-button--operator {
-  background: var(--blue-pastel);
+    background: var(--blue-pastel);
 
-  color: var(--blue-dark);
+    color: var(--blue-dark);
 }
+
 
 /* ========================================
    IGUAL
 ======================================== */
 
 .calculator-button--equals {
-  background: var(--yellow-pastel);
+    background: var(--yellow-pastel);
 
-  color: var(--yellow-dark);
+    color: var(--yellow-dark);
 }
+
 
 /* ========================================
    ZERO
 ======================================== */
 
 .calculator-button--zero {
-  grid-column: span 2;
+    grid-column: span 2;
 }
+
 
 /* ========================================
    RESPONSIVIDADE
 ======================================== */
 
 @media (max-width: 420px) {
-  .calculator-scene {
-    padding: 16px;
-  }
 
-  .calculator {
-    padding: 18px;
+    .calculator-scene {
+        padding: 16px;
+    }
 
-    border-radius: 26px;
-  }
+    .calculator {
+        padding: 18px;
 
-  .calculator-button {
-    min-height: 58px;
+        border-radius: 26px;
+    }
 
-    border-radius: 16px;
-  }
+    .calculator-button {
+        min-height: 58px;
 
-  .display-value {
-    font-size: 2rem;
-  }
-}
+        border-radius: 16px;
+    }
 
-/* ========================================
-   SOMBRA DA CALCULADORA
-======================================== */
-
-.calculator-scene {
-  position: relative;
-
-  width: 100%;
-  min-height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 24px;
-}
-
-.calculator {
-  position: relative;
-  z-index: 1;
-
-  width: min(100%, var(--calculator-width));
-
-  padding: 24px;
-
-  border-radius: 32px;
-
-  background: linear-gradient(145deg, #f06aa8, var(--pink-main));
-
-  border: 3px solid rgba(255, 255, 255, 0.45);
-
-  box-shadow:
-    0 28px 45px rgba(150, 60, 105, 0.22),
-    0 10px 20px rgba(150, 60, 105, 0.12);
-}
-
-.calculator-scene::after {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  bottom: 15%;
-
-  width: 260px;
-  height: 35px;
-
-  transform: translateX(-50%);
-
-  background: rgba(90, 55, 80, 0.18);
-
-  border-radius: 50%;
-
-  filter: blur(18px);
-
-  z-index: 0;
+    .display-value {
+        font-size: 2rem;
+    }
 }
