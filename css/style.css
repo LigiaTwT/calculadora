@@ -6,7 +6,7 @@
   /* Cor principal */
   --pink-main: #e85b9e;
   --pink-dark: #c94482;
-  --pink-light: #f8c6dc;
+  --pink-light: #f7b0cf;
 
   /* Elementos */
   --blue-pastel: #a9dbea;
@@ -99,6 +99,88 @@ body {
   width: min(80%, var(--calculator-width));
 
   flex-shrink: 0;
+}
+
+/* ========================================
+   INDICADOR DE EXPLORAÇÃO 3D
+======================================== */
+
+.calculator-explore-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 28px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: max-content;
+  max-width: calc(100vw - 32px);
+
+  transform: translateX(-50%);
+
+  color: var(--purple-dark);
+
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+
+  opacity: 0.9;
+  pointer-events: none;
+
+  transition: opacity 0.4s ease;
+}
+
+.calculator-explore-hint__arrow {
+  display: block;
+
+  color: var(--pink-main);
+
+  font-size: 1.25rem;
+  line-height: 1.2;
+
+  animation-duration: 2.8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.calculator-explore-hint__arrow--left {
+  animation-name: explore-arrow-left;
+}
+
+.calculator-explore-hint__arrow--right {
+  animation-name: explore-arrow-right;
+}
+
+.calculator-3d-wrapper:hover .calculator-explore-hint {
+  opacity: 0;
+}
+
+@keyframes explore-arrow-left {
+  0%,
+  20%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10% {
+    transform: translateX(-4px);
+  }
+}
+
+@keyframes explore-arrow-right {
+  0%,
+  20%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10% {
+    transform: translateX(4px);
+  }
 }
 
 /* ========================================
@@ -383,6 +465,15 @@ body {
     width: 100%;
   }
 
+  .calculator-explore-hint {
+    bottom: calc(100% + 20px);
+
+    gap: 9px;
+
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
   .calculator {
     padding: 18px;
 
@@ -411,7 +502,9 @@ body {
 ======================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .calculator-button {
+  .calculator-button,
+  .calculator-explore-hint__arrow {
     transition: none;
+    animation: none;
   }
 }
