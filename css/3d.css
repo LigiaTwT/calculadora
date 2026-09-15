@@ -81,8 +81,6 @@
 
   background: linear-gradient(to bottom, var(--pink-dark), #ad306c);
 
-  box-shadow: 0 8px 12px rgba(104, 35, 70, 0.16);
-
   pointer-events: none;
 
   transform: translateZ(-10px);
