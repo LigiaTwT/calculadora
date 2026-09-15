@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,29 @@
     <title>Calculadora</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/3d.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <main class="calculator-scene">
 
+        <div class="calculator-3d-wrapper">
+
+        <div class="calculator-explore-hint" aria-hidden="true">
+            <span class="calculator-explore-hint__arrow calculator-explore-hint__arrow--left">←</span>
+            <span class="calculator-explore-hint__text">Explore em 3D</span>
+            <span class="calculator-explore-hint__arrow calculator-explore-hint__arrow--right">→</span>
+        </div>
+
         <section class="calculator" aria-label="Calculadora">
+
+            <div class="calculator-side calculator-side--left" aria-hidden="true"></div>
+            <div class="calculator-side calculator-side--right" aria-hidden="true"></div>
 
             <header class="calculator-header">
                 <h1 class="calculator-title">Calculadora</h1>
@@ -21,17 +38,9 @@
 
             <div class="calculator-display">
 
-                <div
-                    id="expression"
-                    class="display-expression"
-                    aria-label="Expressão atual"
-                ></div>
+                <div id="expression" class="display-expression" aria-label="Expressão atual"></div>
 
-                <output
-                    id="display"
-                    class="display-value"
-                    aria-label="Valor atual"
-                >
+                <output id="display" class="display-value" aria-label="Valor atual">
                     0
                 </output>
 
@@ -40,177 +49,83 @@
             <div class="calculator-keypad">
 
                 <!-- Funções -->
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--function"
-                    data-action="clear"
-                >
+                <button type="button" class="calculator-button calculator-button--function" data-action="clear">
                     C
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--function"
-                    data-action="backspace"
-                    aria-label="Apagar último número"
-                >
+                <button type="button" class="calculator-button calculator-button--function" data-action="backspace" aria-label="Apagar último número">
                     ⌫
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--operator"
-                    data-action="operator"
-                    data-value="/"
-                    aria-label="Divisão"
-                >
+                <button type="button" class="calculator-button calculator-button--operator" data-action="operator" data-value="/" aria-label="Divisão">
                     ÷
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--operator"
-                    data-action="operator"
-                    data-value="*"
-                    aria-label="Multiplicação"
-                >
+                <button type="button" class="calculator-button calculator-button--operator" data-action="operator" data-value="*" aria-label="Multiplicação">
                     ×
                 </button>
 
 
                 <!-- Linha 2 -->
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="7"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="7">
                     7
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="8"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="8">
                     8
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="9"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="9">
                     9
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--operator"
-                    data-action="operator"
-                    data-value="-"
-                    aria-label="Subtração"
-                >
+                <button type="button" class="calculator-button calculator-button--operator" data-action="operator" data-value="-" aria-label="Subtração">
                     −
                 </button>
 
 
                 <!-- Linha 3 -->
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="4"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="4">
                     4
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="5"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="5">
                     5
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="6"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="6">
                     6
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--operator"
-                    data-action="operator"
-                    data-value="+"
-                    aria-label="Adição"
-                >
+                <button type="button" class="calculator-button calculator-button--operator" data-action="operator" data-value="+" aria-label="Adição">
                     +
                 </button>
 
 
                 <!-- Linha 4 -->
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="1"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="1">
                     1
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="2"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="2">
                     2
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="number"
-                    data-value="3"
-                >
+                <button type="button" class="calculator-button" data-action="number" data-value="3">
                     3
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--equals"
-                    data-action="equals"
-                    aria-label="Resultado"
-                >
+                <button type="button" class="calculator-button calculator-button--equals" data-action="equals" aria-label="Resultado">
                     =
                 </button>
 
 
                 <!-- Linha 5 -->
-                <button
-                    type="button"
-                    class="calculator-button calculator-button--zero"
-                    data-action="number"
-                    data-value="0"
-                >
+                <button type="button" class="calculator-button calculator-button--zero" data-action="number" data-value="0">
                     0
                 </button>
 
-                <button
-                    type="button"
-                    class="calculator-button"
-                    data-action="decimal"
-                    data-value="."
-                    aria-label="Vírgula decimal"
-                >
+                <button type="button" class="calculator-button" data-action="decimal" data-value="." aria-label="Vírgula decimal">
                     ,
                 </button>
 
@@ -218,9 +133,13 @@
 
         </section>
 
+        </div>
+
     </main>
 
     <script src="js/calculator.js"></script>
+    <script src="js/calculator-3d.js"></script>
 
 </body>
+
 </html>

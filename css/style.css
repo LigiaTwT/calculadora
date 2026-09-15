@@ -1,56 +1,510 @@
-.fundo {
-  background-image: linear-gradient(45deg, black, red);
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  width: 100vw;
-  height: 100vh;
+/* ========================================
+   VARIÁVEIS DE DESIGN
+======================================== */
+
+:root {
+  /* Cor principal */
+  --pink-main: #e85b9e;
+  --pink-dark: #c94482;
+  --pink-light: #f7b0cf;
+
+  /* Elementos */
+  --blue-pastel: #a9dbea;
+  --blue-dark: #579bb4;
+
+  --purple-pastel: #c9b5e8;
+  --purple-dark: #8061b2;
+
+  --yellow-pastel: #f7df8b;
+  --yellow-dark: #b99a32;
+
+  /* Neutros */
+  --cream: #fff8ef;
+  --white: #ffffff;
+  --text: #4b3a46;
+  --text-soft: #907b88;
+
+  /* Dimensões */
+  --calculator-width: 440px;
+  --calculator-padding: 24px;
 }
+
+/* ========================================
+   RESET
+======================================== */
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-h1 {
-  text-align: center;
+/* ========================================
+   PÁGINA
+======================================== */
+
+html {
+  min-height: 100%;
 }
 
-.calculadora {
+body {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito", sans-serif;
+
+  color: var(--text);
+
+  background:
+    radial-gradient(circle at 15% 15%, #fbd9e8, transparent 35%),
+    radial-gradient(circle at 85% 85%, #e9def8, transparent 35%), var(--cream);
+}
+
+/* ========================================
+   CENA
+======================================== */
+
+.calculator-scene {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  overflow: hidden;
+}
+
+/* ========================================
+   WRAPPER DA CALCULADORA
+======================================== */
+
+/*
+    O wrapper controla a largura total do objeto.
+
+    Isso mantém a dimensão da calculadora
+    consistente com a estrutura 3D.
+*/
+
+.calculator-3d-wrapper {
+  position: relative;
+
+  width: min(80%, var(--calculator-width));
+
+  flex-shrink: 0;
+}
+
+/* ========================================
+   INDICADOR DE EXPLORAÇÃO 3D
+======================================== */
+
+.calculator-explore-hint {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 15px;
-  padding: 15px;
+  bottom: calc(100% + 28px);
 
-  h1 {
-    margin-bottom: 30px;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: max-content;
+  max-width: calc(100vw - 32px);
+
+  transform: translateX(-50%);
+
+  color: var(--purple-dark);
+
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+
+  opacity: 0.9;
+  pointer-events: none;
+
+  transition: opacity 0.4s ease;
+}
+
+.calculator-explore-hint__arrow {
+  display: block;
+
+  color: var(--pink-main);
+
+  font-size: 1.25rem;
+  line-height: 1.2;
+
+  animation-duration: 2.8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.calculator-explore-hint__arrow--left {
+  animation-name: explore-arrow-left;
+}
+
+.calculator-explore-hint__arrow--right {
+  animation-name: explore-arrow-right;
+}
+
+.calculator-3d-wrapper:hover .calculator-explore-hint {
+  opacity: 0;
+}
+
+@keyframes explore-arrow-left {
+  0%,
+  20%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10% {
+    transform: translateX(-4px);
   }
 }
 
-.botao {
-  width: 50px;
-  height: 50px;
-  font-size: 25px;
-  cursor: pointer;
-  background-color: rgb(31, 31, 31);
-  border: none;
-  color: white;
-  margin: 3px;
-}
-.botao:hover {
-  background-color: black;
+@keyframes explore-arrow-right {
+  0%,
+  20%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10% {
+    transform: translateX(4px);
+  }
 }
 
-#resultado{
-    background-color: white;
-    width: 210px;
-    height: 30px;
-    margin: 5px;
-    font-size: 25px;
-    text-align: right;
-    color: black;
-    padding: 5px;
+/* ========================================
+   SOMBRA DA CALCULADORA
+======================================== */
+
+.calculator-scene::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 14%;
+
+  width: min(280px, 60vw);
+  height: 40px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(91, 49, 73, 0.80);
+
+  filter: blur(24px);
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+/* ========================================
+   CORPO DA CALCULADORA
+======================================== */
+
+.calculator {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: var(--calculator-padding);
+
+  border-radius: 23px;
+
+  background: #df5a9d;
+
+  border: 2px solid #b83f7d;
+
+  box-shadow:
+    0 8px 0 #8f285d,
+    0 16px 22px rgba(145, 52, 99, 0.2),
+    0 30px 45px rgba(145, 52, 99, 0.14);
+}
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.calculator-header {
+  margin-bottom: 18px;
+}
+
+.calculator-title {
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  letter-spacing: 0.03em;
+
+  color: var(--white);
+}
+
+/* ========================================
+   DISPLAY
+======================================== */
+
+.calculator-display {
+  width: 100%;
+  min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 20px;
+
+  margin-bottom: 18px;
+
+  border-radius: 22px;
+
+  background: #fffdfb;
+
+  box-shadow:
+    inset 0 3px 8px rgba(90, 50, 70, 0.8),
+    0 5px 12px rgba(150, 60, 105, 0.12);
+}
+
+/* ========================================
+   EXPRESSÃO
+======================================== */
+
+.display-expression {
+  width: 100%;
+  min-height: 24px;
+
+  overflow: hidden;
+
+  text-align: right;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  color: var(--text-soft);
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ========================================
+   RESULTADO
+======================================== */
+
+.display-value {
+  display: block;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  text-align: right;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 2.4rem;
+  font-weight: 600;
+
+  line-height: 1.1;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: var(--text);
+}
+
+/* ========================================
+   TECLADO
+======================================== */
+
+.calculator-keypad {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+.calculator-button {
+  width: 100%;
+  min-width: 0;
+  min-height: 62px;
+
+  border: none;
+  border-radius: 18px;
+
+  background: var(--white);
+
+  color: var(--text);
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 1.15rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 0 rgba(90, 50, 70, 0.14);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* ========================================
+   HOVER
+======================================== */
+
+.calculator-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 rgba(90, 50, 70, 0.14);
+}
+
+/* ========================================
+   CLIQUE
+======================================== */
+
+.calculator-button:active {
+  transform: translateY(1px);
+
+  box-shadow: 0 3px 0 rgba(90, 50, 70, 0.14);
+}
+
+/* ========================================
+   FOCO PELO TECLADO
+======================================== */
+
+.calculator-button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+}
+
+/* ========================================
+   BOTÕES DE FUNÇÃO
+======================================== */
+
+.calculator-button--function {
+  background: var(--purple-pastel);
+
+  color: var(--purple-dark);
+}
+
+/* ========================================
+   OPERADORES
+======================================== */
+
+.calculator-button--operator {
+  background: var(--blue-pastel);
+
+  color: var(--blue-dark);
+}
+
+/* ========================================
+   IGUAL
+======================================== */
+
+.calculator-button--equals {
+  background: var(--yellow-pastel);
+
+  color: var(--yellow-dark);
+}
+
+/* ========================================
+   ZERO
+======================================== */
+
+.calculator-button--zero {
+  grid-column: span 2;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 600px) {
+  :root {
+    --calculator-padding: 20px;
+  }
+
+  .calculator-scene {
+    padding: 20px;
+  }
+
+  .calculator {
+    border-radius: 28px;
+  }
+}
+
+@media (max-width: 420px) {
+  .calculator-scene {
+    padding: 16px;
+  }
+
+  .calculator-3d-wrapper {
+    width: 100%;
+  }
+
+  .calculator-explore-hint {
+    bottom: calc(100% + 20px);
+
+    gap: 9px;
+
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .calculator {
+    padding: 18px;
+
+    border-radius: 26px;
+  }
+
+  .calculator-button {
+    min-height: 58px;
+
+    border-radius: 16px;
+  }
+
+  .calculator-display {
+    padding: 18px;
+
+    border-radius: 20px;
+  }
+
+  .display-value {
+    font-size: 2rem;
+  }
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .calculator-button,
+  .calculator-explore-hint__arrow {
+    transition: none;
+    animation: none;
+  }
 }

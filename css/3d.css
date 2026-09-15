@@ -1,0 +1,376 @@
+/* ========================================
+   CENA 3D
+======================================== */
+
+.calculator-scene {
+  perspective: 1400px;
+}
+
+/* ========================================
+   WRAPPER DE TRANSFORMAÇÃO
+======================================== */
+
+.calculator-3d-wrapper {
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+
+  position: relative;
+  z-index: 1;
+
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+
+  will-change: transform;
+}
+
+/* ========================================
+   CORPO DA CALCULADORA
+======================================== */
+
+.calculator {
+  position: relative;
+
+  transform-style: preserve-3d;
+
+  transform: rotateX(2deg);
+
+  box-shadow:
+  0 20px 24px rgba(150, 60, 105, 0.18),
+  0 34px 50px rgba(150, 60, 105, 0.14);
+
+}
+
+/* ========================================
+   TAMPA / BRILHO DO CORPO
+======================================== */
+
+.calculator::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2),
+    transparent 35%
+  );
+
+  pointer-events: none;
+
+  transform: translateZ(3px);
+
+  z-index: 10;
+}
+
+/* ========================================
+   BASE / ESPESSURA DO CORPO
+======================================== */
+
+.calculator::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 10px 0 -10px;
+
+  border-radius: 30px;
+
+  background: linear-gradient(to bottom, var(--pink-dark), #ad306c);
+
+  pointer-events: none;
+
+  transform: translateZ(-10px);
+}
+
+/* ========================================
+   FACES LATERAIS DO CORPO
+======================================== */
+
+.calculator-side {
+  /*
+    A profundidade continua grande para que
+    a perspectiva 3D consiga revelar a lateral.
+  */
+  --side-depth: 300px;
+
+  /*
+    Apenas uma pequena parte da lateral
+    ficará visível.
+  */
+  --visible-depth: 80px;
+
+  /*
+    Mantém a lateral posicionada no ponto
+    correto da geometria 3D.
+  */
+  --side-offset: -300px;
+
+  position: absolute;
+
+  top: 10px;
+
+  width: var(--side-depth);
+
+  height: calc(100% - 20px);
+
+  background: linear-gradient(to bottom, #c44b87, #a93670);
+
+  pointer-events: none;
+
+  transform-style: preserve-3d;
+
+  backface-visibility: hidden;
+}
+
+/* ========================================
+   LATERAL ESQUERDA
+======================================== */
+
+.calculator-side--left {
+  left: var(--side-offset);
+
+  transform-origin: right center;
+
+  /*
+    Recorta todo o excesso da face.
+    A geometria continua tendo 300px,
+    mas somente os 24px próximos da
+    calculadora podem aparecer.
+  */
+  clip-path: inset(0 0 0 calc(var(--side-depth) - var(--visible-depth)));
+
+  border-radius: 0 0 0 30px;
+
+  transform: rotateY(-85deg);
+}
+
+/* ========================================
+   LATERAL DIREITA
+======================================== */
+
+.calculator-side--right {
+  right: var(--side-offset);
+
+  transform-origin: left center;
+
+  /*
+    Mesmo princípio da esquerda,
+    invertido horizontalmente.
+  */
+  clip-path: inset(0 calc(var(--side-depth) - var(--visible-depth)) 0 0);
+
+  border-radius: 0 0 30px 0;
+
+  transform: rotateY(85deg);
+}
+
+/* ========================================
+   PROFUNDIDADE DO CABEÇALHO
+======================================== */
+
+.calculator-header {
+  position: relative;
+
+  transform: translateZ(14px);
+}
+
+/* ========================================
+   PROFUNDIDADE DO DISPLAY
+======================================== */
+
+.calculator-display {
+  position: relative;
+
+  transform: translateZ(0);
+
+  transform-style: preserve-3d;
+
+  border: 3px solid var(--pink-dark);
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 16px 0 rgba(194, 68, 130, 0.3),
+    inset 0 12px 14px rgba(91, 49, 73, 0.18),
+    inset 0 -3px 6px rgba(91, 49, 73, 0.1);
+}
+
+/* ========================================
+   PAREDE DO DISPLAY
+======================================== */
+
+.calculator-display::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 5px;
+
+  background: var(--pink-dark);
+
+  box-shadow: inset 0 -4px 5px rgba(73, 31, 55, 0.22);
+
+  pointer-events: none;
+
+  transform: translateZ(1px);
+}
+
+/* ========================================
+   TECLADO
+======================================== */
+
+.calculator-keypad {
+  position: relative;
+
+  transform: translateZ(16px);
+
+  transform-style: preserve-3d;
+}
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+.calculator-button {
+  --button-base: #ded6dc;
+
+  position: relative;
+
+  transform: translateZ(9px);
+
+  transform-style: preserve-3d;
+
+  box-shadow:
+    0 8px 0 rgba(91, 49, 73, 0.22),
+    0 13px 18px rgba(91, 49, 73, 0.12);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* ========================================
+   BASE FÍSICA DOS BOTÕES
+======================================== */
+
+.calculator-button::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 7px 2px -6px;
+
+  z-index: -1;
+
+  border-radius: 0 0 16px 16px;
+
+  background: var(--button-base);
+
+  pointer-events: none;
+
+  transform: translateZ(-2px);
+}
+
+/* ========================================
+   CORES DAS BASES DOS BOTÕES
+======================================== */
+
+.calculator-button--function {
+  --button-base: #af92d2;
+}
+
+.calculator-button--operator {
+  --button-base: #87c2d6;
+}
+
+.calculator-button--equals {
+  --button-base: #dcc564;
+}
+
+/* ========================================
+   HOVER
+======================================== */
+
+.calculator-button:hover {
+  transform: translateY(-2px) translateZ(13px);
+
+  box-shadow:
+    0 10px 0 rgba(91, 49, 73, 0.22),
+    0 17px 22px rgba(91, 49, 73, 0.15);
+}
+
+/* ========================================
+   CLIQUE
+======================================== */
+
+.calculator-button:active {
+  transform: translateY(4px) translateZ(3px);
+
+  box-shadow:
+    0 2px 0 rgba(91, 49, 73, 0.2),
+    0 5px 9px rgba(91, 49, 73, 0.1);
+}
+
+/* ========================================
+   DISPLAY — PROFUNDIDADE INTERNA
+======================================== */
+
+.display-expression,
+.display-value {
+  position: relative;
+
+  transform: translateZ(3px);
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 420px) {
+  .calculator-scene {
+    perspective: 1000px;
+  }
+
+  .calculator-side {
+    --side-depth: 300px;
+    --visible-depth: 16px;
+    --side-offset: -300px;
+
+    top: 8px;
+
+    height: calc(100% - 16px);
+  }
+
+  .calculator-side--left {
+    left: var(--side-offset);
+  }
+
+  .calculator-side--right {
+    right: var(--side-offset);
+  }
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .calculator-3d-wrapper {
+    transform: none;
+
+    will-change: auto;
+  }
+
+  .calculator-button {
+    transition: none;
+  }
+}
